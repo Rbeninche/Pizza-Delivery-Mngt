@@ -1,0 +1,71 @@
+﻿@model PizzaDeliveryManagement.Models.OrderCustomerInfo
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container pTop">
+        <h3 class="text-info">Shopping Cart</h3>
+
+        <table cellpadding="2" cellspacing="2" border="1">
+            <tr>
+                <th>Option</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+            @foreach (var item in ViewBag.cart)
+            {
+                <tr>
+                    <td><a class="btn btn-danger" asp-controller="cart" asp-action="remove" asp-route-id="@item.Menu.MenuId"><i class="fas fa-minus"></i></a></td>
+                    <td>@item.Menu.MenuId</td>
+                    <td>@item.Menu.PizzaName</td>
+                    <td>@item.Menu.Price</td>
+                    <td>@item.Menu.PizzaSizeId</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Menu.Price * item.Quantity)</td>
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="6">Sum</td>
+                <td>@ViewBag.total</td>
+            </tr>
+        </table>
+        <br />
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="OrderId" />
+                    <div class="form-group">
+                        <label asp-for="Customer.FirstName" class="control-label"></label>
+                        <input asp-for="Customer.FirstName" class="form-control" />
+                        <span asp-validation-for="Customer.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Customer.LastName" class="control-label"></label>
+                        <input asp-for="Customer.LastName" class="form-control" />
+                        <span asp-validation-for="Customer.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Customer.MobilePhone" class="control-label"></label>
+                        <input asp-for="Customer.MobilePhone" class="form-control" />
+                        <span asp-validation-for="Customer.MobilePhone" class="text-danger"></span>
+                    </div>
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-success">Continue Shopping</a>
+                    <a asp-controller="CheckOut" asp-action="Index" class="btn btn-outline-success">Complete Order</a>
+                </form>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+
+

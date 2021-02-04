@@ -1,0 +1,50 @@
+﻿@model PizzaDeliveryManagement.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container pTop">
+        <h3 class="text-success">Edit Employee</h3>
+        <div>
+
+            <hr />
+            <partial name="_StatusMessage" model=@ViewBag.StatusMessage />
+
+            <div class="col-md-7">
+                <form asp-action="Edit" class="row-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <div class="col-auto"><label asp-for="FirstName" class="col-form-label font-weight-bold"></label></div>
+                        <div class="col-auto"><input asp-for="FirstName" class="form-control" /></div>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                            <div class="col-auto"><label asp-for="LastName" class="col-form-label font-weight-bold"></label></div>
+                            <div class="col-auto"><input asp-for="LastName" class="form-control" /></div>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto">
+                            <label asp-for="Terminated" class="control-label">
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-control" asp-for="Terminated" />
+                        </div>
+                        <span asp-validation-for="Terminated" class="text-danger"></span>
+                    </div>
+                    <partial name="_EditBackButton" model="Model.Id" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

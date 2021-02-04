@@ -1,0 +1,46 @@
+﻿@model PizzaDeliveryManagement.Models.Salary
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container pTop">
+
+    <br />
+    <h2 class="text-info">Employee's Salary Details</h2>
+    <br />
+    <div class="col-md-7">
+        <fieldset disabled>
+            <div class="form-group">
+                <div class="col-auto">
+                    <label asp-for="Employee.FriendlyName" class="custom-label"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="Employee.FriendlyName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-auto">
+                    <label asp-for="SalaryPerHour" class="custom-label"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="SalaryPerHour" class="form-control" />
+                </div>
+            </div>
+        </fieldset>
+        <br />
+
+        <partial name="_DetailsAndBackButton" model="Model.Id" />
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

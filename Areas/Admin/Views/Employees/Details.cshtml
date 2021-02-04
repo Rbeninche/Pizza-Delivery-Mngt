@@ -1,0 +1,48 @@
+﻿@model PizzaDeliveryManagement.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container pTop">
+        <h3>Details Employee</h3>
+
+        <div>
+            <hr />
+            <div class="col-md-7">
+
+                <div class="col-md-7">
+                    <form asp-action="Details" class="row-form">
+
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <div class="col-auto">
+                                <label asp-for="FirstName" class="col-form-label font-weight-bold"></label>
+                            </div>
+                            <div class="col-auto">
+                                <input asp-for="FirstName" readonly class="form-control" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-auto">
+                                <label asp-for="LastName" class="col-form-label font-weight-bold"></label>
+                            </div>
+                            <div class="col-auto">
+                                <input asp-for="LastName" readonly class="form-control" />
+                            </div>
+
+                        </div>
+
+                        <partial name="_DetailsAndBackButton" model="Model.Id" />
+
+                    </form>
+                </div>
+
+            </div>
+           
+        </div>
+    </div>
+
+

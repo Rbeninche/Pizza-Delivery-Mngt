@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container pTop">
+    <h3 class="text-info">Shopping Cart</h3>
+
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Option</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (var item in ViewBag.cart)
+        {
+    <tr>
+        <td><a class="btn btn-danger" asp-controller="cart" asp-action="remove" asp-route-id="@item.Menu.MenuId"><i class="fas fa-minus"></i></a></td>
+        <td>@item.Menu.MenuId</td>
+        <td>@item.Menu.PizzaName</td>
+        <td>@item.Menu.Price</td>
+        <td>@item.Menu.PizzaSizeId</td>
+        <td>@item.Quantity</td>
+        <td>@(item.Menu.Price * item.Quantity)</td>
+    </tr>
+        }
+        <tr>
+            <td align="right" colspan="6" class="text-info">Order Total</td>
+            <td>$@ViewBag.total</td>
+        </tr>
+    </table>
+    <br />
+    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-success">Continue Shopping</a>
+    <a asp-controller="checkout" asp-action="Index" asp-route-id="" class="btn btn-outline-success">Go To Checkout</a>
+
+</div>
+
+
+

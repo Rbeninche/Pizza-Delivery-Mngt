@@ -25,6 +25,10 @@ a {
 }*/
 
 
+.pTop {
+    padding-top: 6em;
+}
+
 /*##############################################navbar############################*/
 
 .navbar {
@@ -74,6 +78,31 @@ a {
         top: 0;
         left: 100%;
         margin-top: -6px;
+    }
+
+
+/* Table styles
+-------------------------------------------------- */
+
+tr:hover {
+    background-color: #40424f;
+    color: #4fc8af
+}
+
+.text-head {
+    color: #4fc8af;
+}
+
+.text-column {
+    color: #9497aa;
+}
+
+th a {
+    color: #4fc8af;
+}
+
+    th a:hover {
+        color: #60a26b;
     }
 
 /* Sticky footer styles
