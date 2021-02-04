@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PizzaDeliveryManagement.Models;
+using PizzaDeliveryManagement.Utility;
 
 namespace PizzaDeliveryManagement.Controllers
 {
+    [Authorize(Roles = StaticData.AdminUser)]
     [Area("Admin")]
     public class HomeController : Controller
     {

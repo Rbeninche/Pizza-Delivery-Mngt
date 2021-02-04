@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PizzaDeliveryManagement.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container pTop">
+        <div class="row mb-2">
+            <div class="col-6">
+                <h2 class="text-success">Here's a list of all your Employees</h2>
+            </div>
+
+            <div class="col-6 text-right">
+                <partial name="_CreateButtonPartial" />
+            </div>
+
+
+        </div>
+        @if (Model.Count() > 0)
+        {
+    <table class="table">
+        <thead class="text-head">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-column">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    <td>
+                        <partial name="_TableButton" model="item.Id" />
+                     </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+        }
+        else
+        {
+           <p>No Employee added yet</p>
+        }
+
+    </div>
+
+
+
+
+

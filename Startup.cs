@@ -12,6 +12,8 @@ using PizzaDeliveryManagement.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using PizzaDeliveryManagement.Services;
 
 namespace PizzaDeliveryManagement
 {
@@ -30,14 +32,25 @@ namespace PizzaDeliveryManagement
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -50,9 +63,11 @@ namespace PizzaDeliveryManagement
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            dbInitializer.Initialize();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
@@ -62,7 +77,7 @@ namespace PizzaDeliveryManagement
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Customer}/{controller=Product}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
